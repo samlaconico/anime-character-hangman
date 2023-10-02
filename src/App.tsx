@@ -4,7 +4,7 @@ import { HangmanWord } from "./HangmanWord";
 import { Keyboard } from "./Keyboard";
 
 function App() {
-  const [wordToGuess, setWordToGuess] = useState("haze");
+  const [wordToGuess, setWordToGuess] = useState("hazel");
   const [guessLetters, setGuessedLetters] = useState<string[]>([]);
   const inCorrectLetters = guessLetters.filter(
     (letter) => !wordToGuess.includes(letter)
