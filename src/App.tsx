@@ -4,11 +4,23 @@ import { HangmanWord } from "./HangmanWord";
 import { Keyboard } from "./Keyboard";
 
 function App() {
-  const [wordToGuess, setWordToGuess] = useState("test");
+  const [wordToGuess, setWordToGuess] = useState("haze");
   const [guessLetters, setGuessedLetters] = useState<string[]>([]);
   const inCorrectLetters = guessLetters.filter(
     (letter) => !wordToGuess.includes(letter)
   );
+  const [animeWord, setAnimeWord] = useState([]);
+  const getAnimeWord = async () => {
+    const temp = await fetch(
+      `https://api.jikan.moe/v4/top/characters?page=1&limit=5`
+    ).then((res) => res.json());
+
+    console.log(temp.data[0].name);
+  };
+
+  useEffect(() => {
+    getAnimeWord();
+  }, []);
 
   const isLose = inCorrectLetters.length >= 6;
   const isWin = wordToGuess
