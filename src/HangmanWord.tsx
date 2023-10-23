@@ -18,7 +18,6 @@ export function HangmanWord({
         fontWeight: "normal",
         textTransform: "uppercase",
         fontFamily: "monospace",
-        flexWrap: "wrap",
       }}
     >
       {wordToGuess.split("").map((letter, index) => (
@@ -26,7 +25,9 @@ export function HangmanWord({
           <span
             style={{
               visibility:
-                guessedLetters.includes(letter) || reveal
+                guessedLetters.includes(letter) ||
+                reveal ||
+                wordToGuess == "loading"
                   ? "visible"
                   : "hidden",
               color:

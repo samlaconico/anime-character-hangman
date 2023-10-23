@@ -4,28 +4,53 @@ import { HangmanWord } from "./HangmanWord";
 import { Keyboard } from "./Keyboard";
 
 function App() {
-  const [wordToGuess, setWordToGuess] = useState("hazel");
-  const [guessLetters, setGuessedLetters] = useState<string[]>([]);
-  const inCorrectLetters = guessLetters.filter(
-    (letter) => !wordToGuess.includes(letter)
-  );
-  const [animeWord, setAnimeWord] = useState([]);
+  let randomPage = Math.floor(Math.random() * 3) + 1;
+  console.log(randomPage);
+
+  let randomNum = Math.floor(Math.random() * 25);
+  //console.log(randomNum);
+
+  const [image, setImage] = useState("");
+
   const getAnimeWord = async () => {
     const temp = await fetch(
-      `https://api.jikan.moe/v4/top/characters?page=1&limit=5`
+      `https://api.jikan.moe/v4/top/characters?page=${randomPage}&limit=25`
     ).then((res) => res.json());
 
-    console.log(temp.data[0].name);
+    const tempImage: string = temp.data[randomNum].images.jpg.image_url;
+    setImage(tempImage);
+    console.log(image);
+
+    //console.log(temp.data[0].name);
+    console.log(temp.data);
+
+    setWordToGuess(temp.data[randomNum].name.toLowerCase().replace(/\./g, ""));
   };
 
   useEffect(() => {
     getAnimeWord();
   }, []);
 
+  const [wordToGuess, setWordToGuess] = useState("loading");
+  const [guessLetters, setGuessedLetters] = useState<string[]>([]);
+  const inCorrectLetters = guessLetters.filter(
+    (letter) => !wordToGuess.includes(letter)
+  );
+
+  const [animeWord, setAnimeWord] = useState([]);
+
+  const [isWin, setIsWin] = useState(false);
   const isLose = inCorrectLetters.length >= 6;
-  const isWin = wordToGuess
-    .split("")
-    .every((letter) => guessLetters.includes(letter));
+
+  useEffect(() => {
+    setIsWin(
+      wordToGuess
+        .replace(/\s/g, "")
+        .split("")
+        .every((letter) => guessLetters.includes(letter))
+    );
+    //console.log(isWin);
+  }, [wordToGuess, guessLetters]);
 
   const addGuessedLetter = useCallback(
     (letter: string) => {
@@ -64,9 +89,26 @@ function App() {
         alignItems: "center",
       }}
     >
-      <div style={{ fontSize: "2rem", textAlign: "center" }}>
-        {" "}
+      <div
+        style={{
+          fontSize: "2rem",
+          textAlign: "center",
+          color: isWin || isLose ? "black" : "white",
+        }}
+      >
+        {isWin || isLose ? "" : "Blank!"}
         {isWin && "Winner!"} {isLose && "Loser!"}
+      </div>
+      <div
+        style={{
+          position: "relative",
+        }}
+      >
+        {isWin || isLose ? (
+          <img src={image} style={{ maxHeight: "400px" }}></img>
+        ) : (
+          <></>
+        )}
       </div>
       <HangmanDrawing numberOfGuesses={inCorrectLetters.length} />
       <HangmanWord
