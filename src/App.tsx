@@ -84,6 +84,7 @@ function App() {
           fontSize: "2rem",
           textAlign: "center",
           color: isWin || isLose ? "black" : "white",
+          paddingTop: "10px",
         }}
       >
         {isWin || isLose ? "" : "Blank!"}
