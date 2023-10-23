@@ -4,12 +4,12 @@ import { HangmanWord } from "./HangmanWord";
 import { Keyboard } from "./Keyboard";
 
 function App() {
-  let randomPage = Math.floor(Math.random() * 3) + 1;
-  console.log(randomPage);
-
-  let randomNum = Math.floor(Math.random() * 25);
   //console.log(randomNum);
 
+  const [randomPage, setRandomPage] = useState(
+    Math.floor(Math.random() * 3) + 1
+  );
+  const [randomNum, setRandomNum] = useState(Math.floor(Math.random() * 25));
   const [image, setImage] = useState("");
 
   const getAnimeWord = async () => {
@@ -99,18 +99,19 @@ function App() {
         {isWin || isLose ? "" : "Blank!"}
         {isWin && "Winner!"} {isLose && "Loser!"}
       </div>
-      <div
-        style={{
-          position: "relative",
-        }}
-      >
+
+      <div style={{ display: "flex" }}>
+        <HangmanDrawing numberOfGuesses={inCorrectLetters.length} />
+
         {isWin || isLose ? (
-          <img src={image} style={{ maxHeight: "400px" }}></img>
+          <img
+            src={image}
+            style={{ paddingLeft: "100px", maxHeight: "400px" }}
+          ></img>
         ) : (
           <></>
         )}
       </div>
-      <HangmanDrawing numberOfGuesses={inCorrectLetters.length} />
       <HangmanWord
         wordToGuess={wordToGuess}
         guessedLetters={guessLetters}
