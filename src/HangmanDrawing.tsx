@@ -8,6 +8,7 @@ const HEAD = (
       position: "absolute",
       top: "50px",
       right: "-30px",
+      borderColor: "oldlace",
     }}
   />
 );
@@ -17,7 +18,7 @@ const BODY = (
     style={{
       width: "10px",
       height: "100px",
-      background: "black",
+      background: "oldlace",
       position: "absolute",
       top: "120px",
       right: 0,
@@ -32,7 +33,7 @@ const LEFTARM = (
       height: "10px",
       rotate: "-30deg",
       transformOrigin: "left bottom",
-      background: "black",
+      background: "oldlace",
       position: "absolute",
       top: "150px",
       right: "-80px",
@@ -47,7 +48,7 @@ const RIGHTARM = (
       height: "10px",
       rotate: "30deg",
       transformOrigin: "right bottom",
-      background: "black",
+      background: "oldlace",
       position: "absolute",
       top: "150px",
       right: "10px",
@@ -62,7 +63,7 @@ const LEFTLEG = (
       height: "10px",
       rotate: "-60deg",
       transformOrigin: "right bottom",
-      background: "black",
+      background: "oldlace",
       position: "absolute",
       top: "210px",
       right: "0px",
@@ -77,7 +78,7 @@ const RIGHTLEG = (
       height: "10px",
       rotate: "60deg",
       transformOrigin: "left bottom",
-      background: "black",
+      background: "oldlace",
       position: "absolute",
       top: "210px",
       right: "-90px",
@@ -100,7 +101,7 @@ export function HangmanDrawing({ numberOfGuesses }: HangmanDrawingProps) {
           position: "absolute",
           height: "50px",
           width: "10px",
-          background: "black",
+          background: "oldlace",
           top: 0,
           right: 0,
         }}
@@ -109,7 +110,7 @@ export function HangmanDrawing({ numberOfGuesses }: HangmanDrawingProps) {
         style={{
           height: "10px",
           width: "200px",
-          background: "black",
+          background: "oldlace",
           marginLeft: "120px",
         }}
       />
@@ -117,11 +118,11 @@ export function HangmanDrawing({ numberOfGuesses }: HangmanDrawingProps) {
         style={{
           height: "400px",
           width: "10px",
-          background: "black",
+          background: "oldlace",
           marginLeft: "120px",
         }}
       />
-      <div style={{ height: "10px", width: "250px", background: "black" }} />
+      <div style={{ height: "10px", width: "250px", background: "oldlace" }} />
     </div>
   );
 }

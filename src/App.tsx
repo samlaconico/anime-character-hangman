@@ -81,14 +81,15 @@ function App() {
     >
       <div
         style={{
+          fontFamily: "sans-serif",
+          fontWeight: "bold",
           fontSize: "2rem",
           textAlign: "center",
-          color: isWin || isLose ? "black" : "white",
-          paddingTop: "10px",
+          color: "oldlace",
+          paddingTop: isWin || isLose ? "10px" : "47px",
         }}
       >
-        {isWin || isLose ? "" : "Blank!"}
-        {isWin && "Winner!"} {isLose && "Loser!"}
+        {isWin && "You Win!"} {isLose && "You Lose!"}
       </div>
 
       <div style={{ display: "flex" }}>
@@ -97,7 +98,13 @@ function App() {
         {isWin || isLose ? (
           <img
             src={image}
-            style={{ paddingLeft: "100px", height: "400px" }}
+            style={{
+              marginLeft: "100px",
+              height: "400px",
+              borderWidth: "3px",
+              borderStyle: "solid",
+              borderColor: "oldlace",
+            }}
           ></img>
         ) : (
           <></>
