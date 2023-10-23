@@ -106,7 +106,7 @@ function App() {
         {isWin || isLose ? (
           <img
             src={image}
-            style={{ paddingLeft: "100px", maxHeight: "400px" }}
+            style={{ paddingLeft: "100px", height: "400px" }}
           ></img>
         ) : (
           <></>
