@@ -4,13 +4,15 @@ import { HangmanWord } from "./HangmanWord";
 import { Keyboard } from "./Keyboard";
 
 function App() {
-  //console.log(randomNum);
-
   const [randomPage, setRandomPage] = useState(
-    Math.floor(Math.random() * 3) + 1
+    Math.floor(Math.random() * 4) + 1
   );
   const [randomNum, setRandomNum] = useState(Math.floor(Math.random() * 25));
   const [image, setImage] = useState("");
+  const [wordToGuess, setWordToGuess] = useState("loading");
+  const [guessLetters, setGuessedLetters] = useState<string[]>([]);
+  const [animeWord, setAnimeWord] = useState([]);
+  const [isWin, setIsWin] = useState(false);
 
   const getAnimeWord = async () => {
     const temp = await fetch(
@@ -19,11 +21,6 @@ function App() {
 
     const tempImage: string = temp.data[randomNum].images.jpg.image_url;
     setImage(tempImage);
-    console.log(image);
-
-    //console.log(temp.data[0].name);
-    console.log(temp.data);
-
     setWordToGuess(temp.data[randomNum].name.toLowerCase().replace(/\./g, ""));
   };
 
@@ -31,15 +28,9 @@ function App() {
     getAnimeWord();
   }, []);
 
-  const [wordToGuess, setWordToGuess] = useState("loading");
-  const [guessLetters, setGuessedLetters] = useState<string[]>([]);
   const inCorrectLetters = guessLetters.filter(
     (letter) => !wordToGuess.includes(letter)
   );
-
-  const [animeWord, setAnimeWord] = useState([]);
-
-  const [isWin, setIsWin] = useState(false);
   const isLose = inCorrectLetters.length >= 6;
 
   useEffect(() => {
@@ -49,7 +40,6 @@ function App() {
         .split("")
         .every((letter) => guessLetters.includes(letter))
     );
-    //console.log(isWin);
   }, [wordToGuess, guessLetters]);
 
   const addGuessedLetter = useCallback(
